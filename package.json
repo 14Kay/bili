@@ -1,0 +1,38 @@
+{
+  "name": "bili-ts",
+  "version": "1.0.0",
+  "description": "基于bilibili api 的封装",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "test-c": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/14kk/bili.git"
+  },
+  "keywords": [
+    "bilibili",
+    "api",
+    "typescript"
+  ],
+  "author": "14k",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/14kk/bili/issues"
+  },
+  "homepage": "https://github.com/14kk/bili#readme",
+  "dependencies": {
+    "@types/qrcode": "^1.5.0",
+    "@types/qs": "^6.9.7",
+    "axios": "^1.4.0",
+    "form-data": "^4.0.0",
+    "qrcode": "^1.5.3",
+    "qs": "^6.11.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.1",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0"
+  }
+}
