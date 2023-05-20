@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 14K
  * @Date: 2023-05-19 13:59:34
- * @LastEditTime: 2023-05-20 00:33:41
+ * @LastEditTime: 2023-05-20 01:18:12
  * @LastEditors: 14K
  */
 
@@ -37,7 +37,7 @@ export class Login {
     }
     static async loginWithQRcode(
         output: "string" | "buffer" | "terminal" = "buffer",
-        callback: (credential: Credential) => any = function () { },){
+        callback: (credential: Credential) => any){
         const qrcodeInfo = await this.getQRcodeURL()
         
         let countDown = 60;
