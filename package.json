@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/14kk/bili.git"
+    "url": "git+https://github.com/14kay/bili.git"
   },
   "keywords": [
     "bilibili",
@@ -19,9 +19,9 @@
   "author": "14k",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/14kk/bili/issues"
+    "url": "https://github.com/14kay/bili/issues"
   },
-  "homepage": "https://github.com/14kk/bili#readme",
+  "homepage": "https://github.com/14kay/bili#readme",
   "dependencies": {
     "@types/qrcode": "^1.5.0",
     "@types/qs": "^6.9.7",
