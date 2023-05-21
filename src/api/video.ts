@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 14K
  * @Date: 2023-05-20 16:29:43
- * @LastEditTime: 2023-05-21 00:23:53
+ * @LastEditTime: 2023-05-21 13:56:54
  * @LastEditors: 14K
  */
 import { Credential } from "./../types/credential";
@@ -28,13 +28,13 @@ export class Video{
             "http://api.bilibili.com/x/web-interface/view",
             { bvid: this.bvid },
             this.credential,
-        ).then(res => res);
+        )
     }
     static async details(bvid: string): Promise<VideoDetails> {
         return Request.get<VideoDetails>(
             "http://api.bilibili.com/x/web-interface/view",
             { bvid },
-        ).then(res => res);
+        )
     }
     async desc(): Promise<string> {
         return Video.desc(this.bvid);
