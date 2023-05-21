@@ -2,12 +2,15 @@
  * @Description: 
  * @Author: 14K
  * @Date: 2023-05-19 11:46:30
- * @LastEditTime: 2023-05-20 16:15:39
+ * @LastEditTime: 2023-05-21 15:27:59
  * @LastEditors: 14K
  */
 import { Request } from "./../utils/request"
 import { Credential } from "./../types/credential"
-import { UserInfoResponse, UserInfoFromSearch, UserInfo, SearchUserResponse } from "./../types/user"
+import { UserInfoResponse, UserInfoFromSearch, 
+    UserInfo, SearchUserResponse, GetRewardResponse,
+    Reward
+ } from "./../types/user"
 import { Coins } from "./coins"
 import { messages } from "./../common/code2message"
 
@@ -25,25 +28,16 @@ export class User{
             "https://passport.bilibili.com/web/generic/check/nickname",
             { nickname },
         ).then(res => {
-            const messages = {
-                "0":     "昵称未被注册",
-                "2001":  "该昵称已被他人使用",
-                "40002": "昵称包含敏感信息",
-                "40004": "昵称不可包含除-和_以外的特殊字符",
-                "40005": "昵称过长（超过16字符）",
-                "40006": "昵称过短（少于2字符）",
-                "40014": "昵称已存在",
-            }
             return {
                 code: res.code,
                 message: messages[String(res.code)]
             }
         });
     }
-    private async follow(uid: number, act: 1 | 2 | 3 | 4 = 1, from: 11 | 14 | 115 | 222 = 11,): Promise<{code: number, message: string}> {
+    protected async follow(uid: number, act: 1 | 2 | 3 | 4 = 1, from: 11 | 14 | 115 | 222 = 11,): Promise<{code: number, message: string}> {
         return this.modifyRelation(uid, act, from);
     }
-    private async unfollow(uid: number, from: 11 | 14 | 115 | 222 = 11, ): Promise<{code: number, message: string}> {
+    protected async unfollow(uid: number, from: 11 | 14 | 115 | 222 = 11, ): Promise<{code: number, message: string}> {
         return this.modifyRelation(uid, 2, from);
     }
     static async searchUser(keyword: string): Promise<UserInfoFromSearch[]> {
@@ -58,7 +52,7 @@ export class User{
         ).then(res => res.data.items || []);
     }
 
-    private async modifyRelation(fid: number, act: 1 | 2 | 3 | 4 | 5 | 6 | 7 = 1, from: 11 | 14 | 115 | 222 = 11): Promise<{code: number, message: string}> {
+    protected async modifyRelation(fid: number, act: 1 | 2 | 3 | 4 | 5 | 6 | 7 = 1, from: 11 | 14 | 115 | 222 = 11): Promise<{code: number, message: string}> {
         if(!fid) throw new Error("fid is required");
         return Request.get<{ttl: number}>(
             "https://api.bilibili.com/x/relation/modify",
@@ -75,7 +69,18 @@ export class User{
             }
         });
     }
-    private async getCoinHistory(){
+    protected async getCoinHistory(){
         return Coins.getCoinsList(this.credential.uid, this.credential);
+    }
+    protected async getReward(): Promise<GetRewardResponse> {
+        return Request.get<UserInfoResponse<GetRewardResponse>>(
+            "https://api.bilibili.com/x/member/web/exp/reward",
+            {
+                csrf: this.credential.csrf,
+            },
+        ).then(res => res.data);
+    }
+    protected async sendDynamic(){
+        
     }
 }
