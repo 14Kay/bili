@@ -1,7 +1,7 @@
 {
   "name": "bili-ts",
   "version": "1.0.0",
-  "description": "基于bilibili api 的封装",
+  "description": "基于bilibili api 的ts封装",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
